@@ -2,6 +2,11 @@
 
 エモーションは JS で CSS スタイルを記述するために設計されたライブラリ。コンポーネントやタグに直接@media クエリ等を書くことが出来、様々な css 記述が行える。
 
+## 参考リンク
+
+- [Emotion 公式](https://emotion.sh/docs/install)
+- [Next.js と Emotion でいろいろハマった件 1](https://blog.unimoku.com/20201106)
+
 ## §1 導入
 
 ### 1.1 @emotion/react のインストール
@@ -14,7 +19,7 @@ npm i @emotion/react
 
 ### 1.2 @babel/preset-react のインストール
 
-また、emotion には詳しく書かれてなかったのですが、§1.1だけでは§3.1のようなErrorが出てしまうので@babel/preset-reactをインストールします。
+また、emotion には詳しく書かれてなかったのですが、§1.1 だけでは§3.1 のような Error が出てしまうので@babel/preset-react をインストールします。
 
 ```
 npm i @babel/preset-react
@@ -40,7 +45,7 @@ npm i @babel/preset-react
 
 ### 2.1 一つのコンポーネントで完結させる場合
 
-```
+```jsx:main.js
 import { css } from "@emotion/react";
 export default function Hare() {
   const style = css`
@@ -63,7 +68,7 @@ export default function Hare() {
 
 ▼ 親要素
 
-```javascript:main.js
+```jsx:main.js
 import { css } from "@emotion/react";
 
 export default function main() {
@@ -81,7 +86,7 @@ export default function main() {
 
 ▼ 子要素
 
-```javascript:TitleH1.js
+```jsx:TitleH1.js
 export function TitleH1(props) {
   return (
     <h1 css={props.cssOverrides}>タイトルだにょん</h1>
