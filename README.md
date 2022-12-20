@@ -14,7 +14,7 @@ npm i @emotion/react
 
 ### 1.2 @babel/preset-react のインストール
 
-また、emotion の中で babel が使用されているため、基本的な babel のプリセットが必要になるそうです。そのため、@babel/preset-react をインストールします。
+また、emotion には詳しく書かれてなかったのですが、§1.1だけでは§3.1のようなErrorが出てしまうので@babel/preset-reactをインストールします。
 
 ```
 npm i @babel/preset-react
