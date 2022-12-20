@@ -1,34 +1,114 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Emotion
 
-## Getting Started
+エモーションは JS で CSS スタイルを記述するために設計されたライブラリ。コンポーネントやタグに直接@media クエリ等を書くことが出来、様々な css 記述が行える。
 
-First, run the development server:
+## §1 導入
 
-```bash
-npm run dev
-# or
-yarn dev
+### 1.1: @emotion/react のインストール
+
+まず、@emotion/react で emotion の本体をインストールします。
+
+```
+npm i @emotion/react
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 1.2: @babel/preset-react のインストール
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+また、emotion の中で babel が使用されているため、基本的な babel のプリセットが必要になるそうです。そのため、@babel/preset-react をインストールします。
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+```
+npm i @babel/preset-react
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### 1.3: .babelrc の作成
 
-## Learn More
+ルートディレクトリに.babelrc を作ります(babel のルールに新しく Emotion の規則を付け足す...?)
 
-To learn more about Next.js, take a look at the following resources:
+```javascript:.babelrc
+{
+  "presets": [
+    [
+      "@babel/preset-react",
+      { "runtime": "automatic", "importSource": "@emotion/react" }
+    ]
+  ],
+  "plugins": ["@emotion/babel-plugin"]
+}
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## §2 使い方
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 2.1 一つのコンポーネントで完結させる場合
 
-## Deploy on Vercel
+```
+import { css } from "@emotion/react";
+export default function Hare() {
+  const style = css`
+    background: #55ff23;
+    @media (min-width: 420px) {
+      background: hotpink;
+    }
+  `;
+  return (
+    <>
+      <div css={style}>ダダダだ</div>
+    </>
+  );
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 2.2 コンポーネントを跨ぐ場合
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+複数のコンポーネントを橋渡しする場合は cssOverrides を使用する
+
+▼ 親要素
+
+```javascript:main.js
+import { css } from "@emotion/react";
+
+export default function main() {
+  const style = css`
+    background: #55ff23;
+    @media (min-width: 420px) {
+      background: hotpink;
+    }
+  `;
+  return (
+		<TitleH1 cssOverrides={style} />
+	);
+}
+```
+
+▼ 子要素
+
+```javascript:TitleH1.js
+export function TitleH1(props) {
+  return (
+    <h1 css={props.cssOverrides}>タイトルだにょん</h1>
+  );
+}
+```
+
+# §3 エラー
+
+### @babel/preset-react 　が存在しないエラー
+
+以下のエラーは@babel/preset-react が存在しないことを指摘されています。
+
+```
+info  - Using external babel configuration from /Users/k-hareyama/private_code/emotion2/emotion2/.babelrc
+error - ./node_modules/next/dist/client/dev/amp-dev.js
+Error: Cannot find module '@babel/preset-react'
+```
+
+### Inter によるエラー
+
+create-next-app でプロジェクトを作ると index.js に Inter がインポートされてしまいます。
+Inter で何故エラーが出てしまうのかは深掘りしないことにしますが、Inter を無くすとエラーが出ず、今は必要ないので消すことにします。
+
+```
+wait  - compiling...
+error - ./pages/hare.js:4:1
+Syntax error: "@next/font" requires SWC although Babel is being used due to a custom babel config being present.
+Read more: https://nextjs.org/docs/messages/babel-font-loader-conflict
+```
