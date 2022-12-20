@@ -9,7 +9,9 @@ export default function Main() {
   `;
   return (
     <>
-      <div css={style}>はれぽこにょん</div>
+      <div css={style}>
+        はれぽこにょん。インラインでメディアクエリ使えるにょん
+      </div>
     </>
   );
 }
