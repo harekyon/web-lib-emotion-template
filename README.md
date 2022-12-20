@@ -4,7 +4,7 @@
 
 ## §1 導入
 
-### 1.1: @emotion/react のインストール
+### 1.1 @emotion/react のインストール
 
 まず、@emotion/react で emotion の本体をインストールします。
 
@@ -12,7 +12,7 @@
 npm i @emotion/react
 ```
 
-### 1.2: @babel/preset-react のインストール
+### 1.2 @babel/preset-react のインストール
 
 また、emotion の中で babel が使用されているため、基本的な babel のプリセットが必要になるそうです。そのため、@babel/preset-react をインストールします。
 
@@ -20,7 +20,7 @@ npm i @emotion/react
 npm i @babel/preset-react
 ```
 
-### 1.3: .babelrc の作成
+### 1.3 .babelrc の作成
 
 ルートディレクトリに.babelrc を作ります(babel のルールに新しく Emotion の規則を付け足す...?)
 
@@ -91,7 +91,7 @@ export function TitleH1(props) {
 
 # §3 エラー
 
-### @babel/preset-react 　が存在しないエラー
+### 3.1 @babel/preset-react 　が存在しないエラー
 
 以下のエラーは@babel/preset-react が存在しないことを指摘されています。
 
@@ -101,7 +101,7 @@ error - ./node_modules/next/dist/client/dev/amp-dev.js
 Error: Cannot find module '@babel/preset-react'
 ```
 
-### Inter によるエラー
+### 3.2 Inter によるエラー
 
 create-next-app でプロジェクトを作ると index.js に Inter がインポートされてしまいます。
 Inter で何故エラーが出てしまうのかは深掘りしないことにしますが、Inter を無くすとエラーが出ず、今は必要ないので消すことにします。
