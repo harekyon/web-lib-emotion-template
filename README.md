@@ -1,4 +1,8 @@
-# Emotion
+
+## 20230224追記
+Emotionはnext12.2から標準搭載されるようになったため、emotionのインストールやbabelでの設定等が省かれます。具体的な方法は[こちらの記事より](https://zenn.dev/tatsuyasusukida/articles/easy-to-use-emotion-from-nextjs-12-2)。
+簡単に説明すると、next.config.jsのcompilerにemotion:trueとするだけです。
+## About
 
 エモーションは JS で CSS スタイルを記述するために設計されたライブラリ。コンポーネントやタグに直接@media クエリ等を書くことが出来、様々な css 記述が行える。
 
