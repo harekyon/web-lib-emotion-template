@@ -1,4 +1,4 @@
-
+環境：Next.js
 ## 20230224追記
 Emotionはnext12.2から標準搭載されるようになったため、emotionのインストールやbabelでの設定等が省かれます。具体的な方法は[こちらの記事より](https://zenn.dev/tatsuyasusukida/articles/easy-to-use-emotion-from-nextjs-12-2)。
 簡単に説明すると、next.config.jsのcompilerにemotion:trueとするだけです。
